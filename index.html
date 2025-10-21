@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Powered Fake News Detection System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="app-header">
+        <div class="container">
+            <h1>🤖 AI-Powered Fake News Detection System</h1>
+            <p>Advanced Natural Language Processing &amp; Machine Learning for News Credibility Analysis</p>
+        </div>
+    </header>
+
+    <main class="main-content">
+            <!-- Analysis Section -->
+            <section class="analysis-section">
+                <h2>📰 News Analysis</h2>
+                <div class="tabs">
+                    <button class="tab active" onclick="switchInputMethod('text')">Text Analysis</button>
+                    <button class="tab" onclick="switchInputMethod('url')">URL Analysis</button>
+                </div>
+
+                <!-- Text Input -->
+                <div id="text-input-section" class="tab-content active">
+                    <div class="input-group">
+                        <label class="form-label" for="news-text">Enter news article text (minimum 50 characters):</label>
+                        <textarea id="news-text" class="form-control" placeholder="Paste the news article text here for analysis..." rows="8" oninput="updateCharCount()"></textarea>
+                        <div id="char-count" class="char-count">0 characters</div>
+                    </div>
+                </div>
+
+                <!-- URL Input -->
+                <div id="url-input-section" class="tab-content">
+                    <div class="input-group">
+                        <label class="form-label" for="news-url">Enter news article URL:</label>
+                        <input type="url" id="news-url" class="form-control" placeholder="https://example.com/news-article">
+                        <p style="font-size: var(--font-size-sm); color: var(--color-text-secondary); margin-top: var(--space-8);">Note: URL analysis is simulated for demo purposes</p>
+                    </div>
+                </div>
+
+                <!-- Model Selection -->
+                <div class="model-selector">
+                    <label class="form-label" for="model-select">Select AI Model:</label>
+                    <select id="model-select" class="form-control">
+                        <option value="random_forest">Random Forest (Recommended)</option>
+                        <option value="svm">Support Vector Machine</option>
+                        <option value="roberta">RoBERTa Transformer</option>
+                    </select>
+                </div>
+
+                <button id="analyze-btn" class="btn btn--primary btn--lg btn--full-width" onclick="analyzeNews()">🔍 Analyze News</button>
+            </section>
+
+            <!-- Results Section -->
+            <section id="results-section" class="hidden">
+                <div class="result-card" id="result-card">
+                    <div class="result-prediction" id="prediction-text"></div>
+                    <div class="confidence-meter">
+                        <div class="confidence-bar" id="confidence-bar" style="width: 0%"></div>
+                    </div>
+                    <div id="confidence-text" style="font-size: var(--font-size-lg); font-weight: var(--font-weight-medium); margin-top: var(--space-8);"></div>
+                    <div id="sentiment-indicator" style="margin-top: var(--space-16);"></div>
+                </div>
+
+                <div class="grid grid-2">
+                    <div class="card">
+                        <div class="card__body">
+                            <h4>🔑 Key Features Detected</h4>
+                            <ul id="key-features" class="feature-list"></ul>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card__body">
+                            <h4>📊 Analysis Details</h4>
+                            <div id="analysis-details"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Model Information -->
+            <section class="model-info">
+                <h3>🤖 Current AI Model</h3>
+                <div class="grid grid-3">
+                    <div>
+                        <strong>Model:</strong> <span id="current-model">Random Forest Classifier</span>
+                    </div>
+                    <div>
+                        <strong>Accuracy:</strong> <span id="model-accuracy">99.95%</span>
+                    </div>
+                    <div>
+                        <strong>Dataset:</strong> ISOT Dataset (44.9K articles)
+                    </div>
+                </div>
+            </section>
+
+            <!-- Main Tabs -->
+            <div class="tabs">
+                <button class="tab active" onclick="switchTab('dashboard')">📊 Dashboard</button>
+                <button class="tab" onclick="switchTab('education')">📚 Education</button>
+                <button class="tab" onclick="switchTab('samples')">📰 Sample Articles</button>
+                <button class="tab" onclick="switchTab('history')">📋 History</button>
+                <button class="tab" onclick="switchTab('charts')">📈 Model Performance</button>
+            </div>
+
+            <!-- Dashboard Tab -->
+            <div id="dashboard-tab" class="tab-content active">
+                <h3>📊 Analysis Statistics</h3>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div id="today-analyses" class="stat-number">47</div>
+                        <div class="stat-label">Articles Analyzed Today</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">73%</div>
+                        <div class="stat-label">Real News Detected</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">27%</div>
+                        <div class="stat-label">Fake News Detected</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">99.95%</div>
+                        <div class="stat-label">Model Accuracy</div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: var(--space-24);">
+                    <div class="card__body">
+                        <h4>🏆 Datasets Used for Training</h4>
+                        <div class="grid grid-3">
+                            <div>
+                                <strong>LIAR Dataset</strong><br>
+                                <span style="color: var(--color-text-secondary);">12.8K statements</span><br>
+                                <span style="color: var(--color-success);">79.88% accuracy</span>
+                            </div>
+                            <div>
+                                <strong>ISOT Dataset</strong><br>
+                                <span style="color: var(--color-text-secondary);">44.9K articles</span><br>
+                                <span style="color: var(--color-success);">99.95% accuracy</span>
+                            </div>
+                            <div>
+                                <strong>WELFake Dataset</strong><br>
+                                <span style="color: var(--color-text-secondary);">72.1K articles</span><br>
+                                <span style="color: var(--color-success);">95.3% accuracy</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Education Tab -->
+            <div id="education-tab" class="tab-content">
+                <h3>📚 How to Identify Fake News</h3>
+                <div class="grid grid-2">
+                    <div class="card">
+                        <div class="card__body">
+                            <h4>🚨 Common Fake News Indicators</h4>
+                            <ul class="tips-list">
+                                <li>Sensational or clickbait headlines</li>
+                                <li>Lack of credible sources or citations</li>
+                                <li>Emotional language designed to provoke</li>
+                                <li>Poor grammar and spelling errors</li>
+                                <li>Unverified claims without evidence</li>
+                                <li>Anonymous or questionable authorship</li>
+                                <li>Inconsistent or contradictory information</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card__body">
+                            <h4>✅ Verification Tips</h4>
+                            <ul class="tips-list">
+                                <li>Check the source's credibility and reputation</li>
+                                <li>Look for corroborating reports from multiple sources</li>
+                                <li>Verify quotes and statistics independently</li>
+                                <li>Check publication date for relevance</li>
+                                <li>Examine images for signs of manipulation</li>
+                                <li>Consider the author's expertise and bias</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: var(--space-24);">
+                    <div class="card__body">
+                        <h4>🌐 Recommended Fact-Checking Resources</h4>
+                        <div class="grid grid-3">
+                            <div>
+                                <a href="https://www.snopes.com" target="_blank">Snopes.com</a><br>
+                                <span style="color: var(--color-text-secondary); font-size: var(--font-size-sm);">Comprehensive fact-checking</span>
+                            </div>
+                            <div>
+                                <a href="https://www.factcheck.org" target="_blank">FactCheck.org</a><br>
+                                <span style="color: var(--color-text-secondary); font-size: var(--font-size-sm);">Political fact-checking</span>
+                            </div>
+                            <div>
+                                <a href="https://www.politifact.com" target="_blank">PolitiFact</a><br>
+                                <span style="color: var(--color-text-secondary); font-size: var(--font-size-sm);">Truth-O-Meter ratings</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sample Articles Tab -->
+            <div id="samples-tab" class="tab-content">
+                <h3>📰 Try These Sample Articles</h3>
+            
+                <h4 style="color: var(--color-success); margin-top: var(--space-24);">✅ Real News Examples</h4>
+                <div id="real-samples"></div>
+
+                <h4 style="color: var(--color-error); margin-top: var(--space-32);">❌ Fake News Examples</h4>
+                <div id="fake-samples"></div>
+            </div>
+
+            <!-- History Tab -->
+            <div id="history-tab" class="tab-content">
+                <h3>📋 Analysis History</h3>
+                <div class="card">
+                    <div class="card__body">
+                        <div id="history-list">
+                            <p style="color: var(--color-text-secondary); text-align: center;">No analyses performed yet. Try analyzing some news articles!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Tab -->
+            <div id="charts-tab" class="tab-content">
+                <h3>📈 Model Performance Comparison</h3>
+                <div class="chart-container">
+                    <img src="https://ppl-ai-code-interpreter-files.s3.amazonaws.com/web/direct-files/4bc3c9e9281336e6431e36ca080e328d/2cf1e22d-84bc-4f9d-8a17-39837a8ed9fd/2c5673b4.png" alt="Model Performance Comparison Chart" style="width: 100%; max-width: 800px;">
+                    <p style="color: var(--color-text-secondary); margin-top: var(--space-16);">Comparison of different machine learning models for fake news detection</p>
+                </div>
+            
+                <div class="chart-container" style="margin-top: var(--space-32);">
+                    <img src="https://ppl-ai-code-interpreter-files.s3.amazonaws.com/web/direct-files/4bc3c9e9281336e6431e36ca080e328d/81b72d17-a42a-44eb-96e0-01606706dd00/2c5673b4.png" alt="Dataset Comparison Chart" style="width: 100%; max-width: 800px;">
+                    <p style="color: var(--color-text-secondary); margin-top: var(--space-16);">Popular fake news detection datasets by size and domain</p>
+                </div>
+            
+                <div class="chart-container" style="margin-top: var(--space-32);">
+                    <img src="https://user-gen-media-assets.s3.amazonaws.com/seedream_images/b45ab828-bf52-4d9a-bbb8-433fcca2d831.png" alt="System Architecture Diagram" style="width: 100%; max-width: 600px;">
+                    <p style="color: var(--color-text-secondary); margin-top: var(--space-16);">AI-powered fake news detection system architecture</p>
+                </div>
+            </div>
+        </main>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

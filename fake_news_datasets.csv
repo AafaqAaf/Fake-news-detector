@@ -1,0 +1,7 @@
+Dataset,Size,Classes,Source,Language,Domain,Year
+LIAR,12.8K statements,6,PolitiFact,English,Political,2017
+FakeNewsNet,23.5K articles,2,PolitiFact+GossipCop,English,General news,2018
+ISOT,44.9K articles,2,Reuters+Unreliable,English,General news,2018
+WELFake,72.1K articles,2,Multiple sources,English,Mixed,2020
+Kaggle Fake News,20.8K articles,2,Various,English,General news,2019
+COVID-FN,10.7K tweets,2,Twitter,English,Health/COVID,2021

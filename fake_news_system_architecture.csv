@@ -1,0 +1,8 @@
+Layer,Components,Technology_Stack
+Data Input,"News articles, URLs, User text input","Text files, URLs, JSON"
+Data Preprocessing,"Text cleaning, Tokenization, Stop word removal, Lemmatization","NLTK, SpaCy, RegEx"
+Feature Extraction,"TF-IDF, Word2Vec, BERT embeddings, N-grams","Scikit-learn, Hugging Face Transformers"
+Model Training/Inference,"Random Forest, SVM, BERT, RoBERTa, Ensemble methods","TensorFlow, PyTorch, Scikit-learn"
+Output Processing,"Prediction, Confidence score, Explanation generation","LIME, SHAP, Custom algorithms"
+User Interface,"Web app (Streamlit/Flask), Mobile app, Browser extension","Streamlit, Flask, React, HTML/CSS"
+API Integration,"NewsAPI, FastAPI endpoints, Real-time processing","FastAPI, REST APIs, WebSocket"
